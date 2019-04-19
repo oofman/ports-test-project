@@ -11,7 +11,6 @@ class Port < ApplicationRecord
 
     _items = _items.order('ports.name ASC').paginate(:page => _page, :per_page => 10)
 
-    return _items
   end
 
   def self._get_list_page_stats(params)
@@ -24,7 +23,7 @@ class Port < ApplicationRecord
     _count = _items.count
     _offset = (10 * _page.to_i) - 10
 
-    return {
+    {
         :amount => _count,
         :page => _page,
         :total_pages => (_count/10.to_f).ceil,
