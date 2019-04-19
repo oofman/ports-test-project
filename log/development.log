@@ -565,3 +565,239 @@ Processing by HomeController#index as */*
 Completed 200 OK in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms)
 
 
+  [1m[35m (179.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3394398716125288620);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (179.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreatePorts (20190419082915)
+  [1m[35m (179.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (178.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (178.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(3394398716125288620)[0m
+  [1m[35m (169.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3394398716125288620);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (169.6ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreatePorts (20190419082915)
+  [1m[35m (168.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (171.2ms)[0m  [1m[35mCREATE TABLE "ports" ("id" serial primary key, "code" character varying NOT NULL, "name" character varying NOT NULL, "city" character varying, "latitude" double, "longitude" double, "big_schedules" character varying, "port_type" character varying NOT NULL, "hub_port" boolean DEFAULT 'f', "oi_code" character varying, "oi" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (169.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (169.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(3394398716125288620)[0m
+  [1m[35m (178.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3394398716125288620);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (179.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreatePorts (20190419082915)
+  [1m[35m (185.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (191.5ms)[0m  [1m[35mCREATE TABLE "ports" ("id" serial primary key, "code" character varying NOT NULL, "name" character varying NOT NULL, "city" character varying, "latitude" float(30), "longitude" float(30), "big_schedules" character varying, "port_type" character varying NOT NULL, "hub_port" boolean DEFAULT 'f', "oi_code" character varying, "oi" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (185.4ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_ports_on_code" ON "ports"  ("code")[0m
+  [1m[35mSQL (178.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190419082915"]]
+  [1m[35m (179.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (179.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (178.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (179.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (179.0ms)[0m  [1m[34mSELECT pg_advisory_unlock(3394398716125288620)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (178.6ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Started GET "/" for ::1 at 2019-04-19 11:16:02 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (169.9ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomeController#index as */*
+  Parameters: {"home"=>{}}
+Completed 200 OK in 5ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2019-04-19 11:16:23 +0200
+Processing by SessionsController#create as */*
+  Parameters: {"email"=>"admin@example.com", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (170.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "admin@example.com"], ["LIMIT", 1]]
+Completed 200 OK in 1075ms (Views: 0.2ms | ActiveRecord: 852.3ms)
+
+
+Started GET "/ports/" for ::1 at 2019-04-19 11:16:40 +0200
+Processing by PortsController#index as */*
+  Parameters: {"port"=>{}}
+  [1m[35m (169.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "ports"[0m
+Completed 500 Internal Server Error in 180ms (ActiveRecord: 340.9ms)
+
+
+  
+NoMethodError (undefined method `render' for #<PortDetail:0x000055e1fb46ad38>):
+  
+app/services/port_detail.rb:7:in `list'
+app/controllers/ports_controller.rb:6:in `index'
+  Rendering /home/i9/.rvm/gems/ruby-2.4.5/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /home/i9/.rvm/gems/ruby-2.4.5/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /home/i9/.rvm/gems/ruby-2.4.5/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (1.7ms)
+  Rendering /home/i9/.rvm/gems/ruby-2.4.5/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/i9/.rvm/gems/ruby-2.4.5/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.7ms)
+  Rendering /home/i9/.rvm/gems/ruby-2.4.5/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/i9/.rvm/gems/ruby-2.4.5/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /home/i9/.rvm/gems/ruby-2.4.5/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (12.8ms)
+DEPRECATION WARNING: Accessing mime types via constants is deprecated. Please change `Mime::HTML` to `Mime[:html]`. (called from acceptable_content_type? at /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/middleware.rb:58)
+  Rendering /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb
+  Rendered /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.2ms)
+  Rendering /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript
+  Rendering /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string
+  Rendered /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendering /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string
+  Rendered /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.1ms)
+  Rendering /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string
+  Rendered /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+DEPRECATION WARNING: Accessing mime types via constants is deprecated. Please change `Mime::WEB_CONSOLE_V2` to `Mime[:web_console_v2]`. (called from __home_i___rvm_gems_ruby_______gems_web_console_______lib_web_console_templates_console_js_erb___3733424339642517678_47214543794660 at /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb:491)
+  Rendered /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (11.5ms)
+  Rendering /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript
+  Rendered /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.1ms)
+  Rendering /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript
+  Rendered /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (20.7ms)
+Started GET "/ports" for ::1 at 2019-04-19 11:16:53 +0200
+Processing by PortsController#index as */*
+  Parameters: {"port"=>{}}
+  [1m[35m (169.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "ports"[0m
+Completed 500 Internal Server Error in 177ms (ActiveRecord: 169.9ms)
+
+
+  
+NoMethodError (undefined method `render' for #<PortDetail:0x000055e1fc2d6de0>):
+  
+app/services/port_detail.rb:7:in `list'
+app/controllers/ports_controller.rb:6:in `index'
+  Rendering /home/i9/.rvm/gems/ruby-2.4.5/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /home/i9/.rvm/gems/ruby-2.4.5/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /home/i9/.rvm/gems/ruby-2.4.5/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (1.8ms)
+  Rendering /home/i9/.rvm/gems/ruby-2.4.5/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/i9/.rvm/gems/ruby-2.4.5/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.7ms)
+  Rendering /home/i9/.rvm/gems/ruby-2.4.5/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/i9/.rvm/gems/ruby-2.4.5/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.4ms)
+  Rendered /home/i9/.rvm/gems/ruby-2.4.5/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (11.3ms)
+DEPRECATION WARNING: Accessing mime types via constants is deprecated. Please change `Mime::HTML` to `Mime[:html]`. (called from acceptable_content_type? at /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/middleware.rb:58)
+  Rendering /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb
+  Rendered /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.1ms)
+  Rendering /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript
+  Rendering /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string
+  Rendered /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.1ms)
+  Rendering /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string
+  Rendered /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.1ms)
+  Rendering /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string
+  Rendered /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.1ms)
+DEPRECATION WARNING: Accessing mime types via constants is deprecated. Please change `Mime::WEB_CONSOLE_V2` to `Mime[:web_console_v2]`. (called from __home_i___rvm_gems_ruby_______gems_web_console_______lib_web_console_templates_console_js_erb___3733424339642517678_47214541135100 at /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb:491)
+  Rendered /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (8.9ms)
+  Rendering /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript
+  Rendered /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.1ms)
+  Rendering /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript
+  Rendered /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.2ms)
+  Rendered /home/i9/.rvm/gems/ruby-2.4.5/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (18.9ms)
+Started GET "/ports" for ::1 at 2019-04-19 11:19:02 +0200
+Processing by PortsController#index as */*
+  Parameters: {"port"=>{}}
+  [1m[35m (169.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "ports"[0m
+  [1m[36mPort Load (169.7ms)[0m  [1m[34mSELECT  "ports".* FROM "ports" ORDER BY ports.name ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 10], ["OFFSET", 0]]
+Completed 200 OK in 344ms (Views: 1.4ms | ActiveRecord: 678.4ms)
+
+
+Started GET "/ports" for ::1 at 2019-04-19 11:19:36 +0200
+Processing by PortsController#index as */*
+  Parameters: {"port"=>{}}
+  [1m[35m (169.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "ports"[0m
+  [1m[36mPort Load (169.0ms)[0m  [1m[34mSELECT  "ports".* FROM "ports" ORDER BY ports.name ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 10], ["OFFSET", 0]]
+Completed 200 OK in 343ms (Views: 2.4ms | ActiveRecord: 677.5ms)
+
+
+Started GET "/ports" for ::1 at 2019-04-19 11:19:50 +0200
+Processing by PortsController#index as */*
+  Parameters: {"port"=>{}}
+  [1m[36mUser Load (168.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (168.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "ports"[0m
+  [1m[36mPort Load (168.8ms)[0m  [1m[34mSELECT  "ports".* FROM "ports" ORDER BY ports.name ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 10], ["OFFSET", 0]]
+Completed 200 OK in 1036ms (Views: 1.0ms | ActiveRecord: 1186.8ms)
+
+
+Started GET "/ports" for ::1 at 2019-04-19 11:19:55 +0200
+Processing by PortsController#index as */*
+  Parameters: {"port"=>{}}
+Filter chain halted as :authenticate rendered or redirected
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/ports" for ::1 at 2019-04-19 11:20:10 +0200
+Processing by PortsController#index as */*
+  Parameters: {"port"=>{}}
+Filter chain halted as :authenticate rendered or redirected
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/ports?search=test" for ::1 at 2019-04-19 11:21:47 +0200
+Processing by PortsController#index as */*
+  Parameters: {"search"=>"test", "port"=>{}}
+  [1m[35m (648.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "ports" WHERE (  ports.name ILIKE '%test%' )[0m
+  [1m[36mPort Load (249.9ms)[0m  [1m[34mSELECT  "ports".* FROM "ports" WHERE (  ports.name ILIKE '%test%' ) ORDER BY ports.name ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 10], ["OFFSET", 0]]
+Completed 200 OK in 903ms (Views: 0.7ms | ActiveRecord: 1237.6ms)
+
+
+Started GET "/ports?search=test" for ::1 at 2019-04-19 11:23:32 +0200
+Processing by PortsController#index as */*
+  Parameters: {"search"=>"test", "port"=>{}}
+  [1m[35m (170.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "ports" WHERE (  ports.name ILIKE '%test%'  OR ports.code ILIKE '%test%' )[0m
+  [1m[36mPort Load (170.7ms)[0m  [1m[34mSELECT  "ports".* FROM "ports" WHERE (  ports.name ILIKE '%test%'  OR ports.code ILIKE '%test%' ) ORDER BY ports.name ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 10], ["OFFSET", 0]]
+Completed 200 OK in 348ms (Views: 2.2ms | ActiveRecord: 682.4ms)
+
+
+Started GET "/ports?search=test" for ::1 at 2019-04-19 11:35:28 +0200
+Processing by PortsController#index as */*
+  Parameters: {"search"=>"test", "port"=>{}}
+  [1m[35m (169.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "ports" WHERE "ports"."port_type" IS NULL[0m
+  [1m[36mPort Load (169.3ms)[0m  [1m[34mSELECT  "ports".* FROM "ports" WHERE "ports"."port_type" IS NULL ORDER BY ports.name ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 10], ["OFFSET", 0]]
+Completed 200 OK in 342ms (Views: 1.6ms | ActiveRecord: 679.2ms)
+
+
+Started GET "/ports?search=test" for ::1 at 2019-04-19 11:35:36 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (169.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PortsController#index as */*
+  Parameters: {"search"=>"test", "port"=>{}}
+  [1m[35m (170.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "ports" WHERE "ports"."port_type" IS NULL[0m
+  [1m[36mPort Load (170.6ms)[0m  [1m[34mSELECT  "ports".* FROM "ports" WHERE "ports"."port_type" IS NULL ORDER BY ports.name ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 10], ["OFFSET", 0]]
+Completed 200 OK in 350ms (Views: 2.4ms | ActiveRecord: 682.2ms)
+
+
+Started GET "/ports?search=test" for ::1 at 2019-04-19 11:36:45 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (178.7ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PortsController#index as */*
+  Parameters: {"search"=>"test", "port"=>{}}
+  [1m[35m (179.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "ports"[0m
+  [1m[36mPort Load (179.1ms)[0m  [1m[34mSELECT  "ports".* FROM "ports" ORDER BY ports.name ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 10], ["OFFSET", 0]]
+Completed 200 OK in 381ms (Views: 1.8ms | ActiveRecord: 717.4ms)
+
+
+Started GET "/ports?search=test" for ::1 at 2019-04-19 11:37:47 +0200
+Processing by PortsController#index as */*
+  Parameters: {"search"=>"test", "port"=>{}}
+  [1m[35m (179.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "ports" WHERE (ports.name ILIKE '%test%' OR ports.code ILIKE '%test%' )[0m
+  [1m[36mPort Load (179.5ms)[0m  [1m[34mSELECT  "ports".* FROM "ports" WHERE (ports.name ILIKE '%test%' OR ports.code ILIKE '%test%' ) ORDER BY ports.name ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 10], ["OFFSET", 0]]
+Completed 200 OK in 366ms (Views: 2.2ms | ActiveRecord: 358.6ms)
+
+
+Started GET "/ports?search=test&port_type=seaport,airport" for ::1 at 2019-04-19 11:40:05 +0200
+Processing by PortsController#index as */*
+  Parameters: {"search"=>"test", "port_type"=>"seaport,airport", "port"=>{}}
+  [1m[35m (179.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "ports" WHERE (ports.name ILIKE '%test%' OR ports.code ILIKE '%test%' ) AND "ports"."port_type" = $1[0m  [["port_type", "seaport,airport"]]
+  [1m[36mPort Load (179.7ms)[0m  [1m[34mSELECT  "ports".* FROM "ports" WHERE (ports.name ILIKE '%test%' OR ports.code ILIKE '%test%' ) AND "ports"."port_type" = $1 ORDER BY ports.name ASC LIMIT $2 OFFSET $3[0m  [["port_type", "seaport,airport"], ["LIMIT", 10], ["OFFSET", 0]]
+Completed 200 OK in 364ms (Views: 2.3ms | ActiveRecord: 358.7ms)
+
+
+Started GET "/ports?search=test&port_type=seaport,airport" for ::1 at 2019-04-19 11:43:27 +0200
+Processing by PortsController#index as */*
+  Parameters: {"search"=>"test", "port_type"=>"seaport,airport", "port"=>{}}
+  [1m[35m (178.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "ports" WHERE (ports.name ILIKE '%test%' OR ports.code ILIKE '%test%' )[0m
+  [1m[36mPort Load (178.1ms)[0m  [1m[34mSELECT  "ports".* FROM "ports" WHERE (ports.name ILIKE '%test%' OR ports.code ILIKE '%test%' ) ORDER BY ports.name ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 10], ["OFFSET", 0]]
+Completed 200 OK in 364ms (Views: 2.2ms | ActiveRecord: 356.6ms)
+
+
+Started GET "/ports?search=test&port_type=seaport,airport" for ::1 at 2019-04-19 11:43:37 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (169.6ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PortsController#index as */*
+  Parameters: {"search"=>"test", "port_type"=>"seaport,airport", "port"=>{}}
+  [1m[35m (170.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "ports" WHERE (ports.name ILIKE '%test%' OR ports.code ILIKE '%test%' )[0m
+  [1m[36mPort Load (170.4ms)[0m  [1m[34mSELECT  "ports".* FROM "ports" WHERE (ports.name ILIKE '%test%' OR ports.code ILIKE '%test%' ) ORDER BY ports.name ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 10], ["OFFSET", 0]]
+Completed 200 OK in 364ms (Views: 2.4ms | ActiveRecord: 681.5ms)
+
+
+Started GET "/ports?search=test&port_type=seaport" for ::1 at 2019-04-19 11:44:26 +0200
+Processing by PortsController#index as */*
+  Parameters: {"search"=>"test", "port_type"=>"seaport", "port"=>{}}
+  [1m[35m (180.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "ports" WHERE (ports.name ILIKE '%test%' OR ports.code ILIKE '%test%' ) AND "ports"."port_type" = $1[0m  [["port_type", "seaport"]]
+  [1m[36mPort Load (179.1ms)[0m  [1m[34mSELECT  "ports".* FROM "ports" WHERE (ports.name ILIKE '%test%' OR ports.code ILIKE '%test%' ) AND "ports"."port_type" = $1 ORDER BY ports.name ASC LIMIT $2 OFFSET $3[0m  [["port_type", "seaport"], ["LIMIT", 10], ["OFFSET", 0]]
+Completed 200 OK in 366ms (Views: 2.5ms | ActiveRecord: 359.1ms)
+
+

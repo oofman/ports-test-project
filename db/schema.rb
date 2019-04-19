@@ -10,10 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160509084039) do
+ActiveRecord::Schema.define(version: 20190419082915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "ports", force: :cascade do |t|
+    t.string   "code",                          null: false
+    t.string   "name",                          null: false
+    t.string   "city"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "big_schedules"
+    t.string   "port_type",                     null: false
+    t.boolean  "hub_port",      default: false
+    t.string   "oi_code"
+    t.string   "oi"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.index ["code"], name: "index_ports_on_code", unique: true, using: :btree
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name",            null: false
