@@ -56,6 +56,7 @@ group :development do
   gem 'spring'
 
   gem 'rubocop'
+  gem 'rspec-rails', '~> 3.7'
 end
 
 gem 'rails_12factor', group: :production
