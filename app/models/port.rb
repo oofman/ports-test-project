@@ -1,5 +1,9 @@
 class Port < ApplicationRecord
 
+  validates :code, :presence => {:presence => true, message: "Please supply a valid code."}
+  validates :name, :presence => {:presence => true, message: "Please supply a valid name."}
+  validates :port_type, :presence => {:presence => true, message: "Please supply a valid port type."}
+
   def self._get_list_page(params)
 
     _page = (params[:page].present?) ? params[:page] : 1

@@ -22,10 +22,18 @@ class PortDetail
   def process_csv
 
     file = @params[:file]
+    file_size = (file.size.to_f / (1000 * 1000))
+
     return { error: 'file content type not accepted' } unless file.content_type == 'text/csv'
+    return { error: '5MB is the max file size.' } unless file_size <= 5
 
     counter = 0
     counter2 = 0
+
+    ports = Port.select('DISTINCT code').all
+    _port_codes = ports.map(&:code)
+    _ports = []
+
     CSV.foreach(file.path) do |row|
 
       #exclude heading row
@@ -44,16 +52,22 @@ class PortDetail
         oi: row[12]
       }
 
-      port = Port.where(:code => row[2]).first
-      if !port
-        port = Port.new(port_params)
-        if port.save
-          counter += 1
-        end
+
+      if !_port_codes.include? row[2]
+        _ports.push(port_params)
+        counter += 1
       else
         counter2 += 1
       end
 
+    end
+
+    if _ports.length > 0
+      Port.transaction do
+        _ports.each do |_port|
+          Port.create!(_port)
+        end
+      end
     end
 
     { info: "imported #{counter} ports, #{counter2} duplicates found" }

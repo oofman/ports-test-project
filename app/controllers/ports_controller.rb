@@ -14,6 +14,7 @@ class PortsController < ApplicationController
 
 
   private
+
   def ports_service
     PortDetail.new(params)
   end
