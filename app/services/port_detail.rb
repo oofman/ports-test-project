@@ -22,9 +22,11 @@ class PortDetail
   def process_csv
 
     file = @params[:file]
-    file_size = (file.size.to_f / (1000 * 1000))
 
+    return { error: 'Not a valid file supplied' } unless !file.nil?
     return { error: 'file content type not accepted' } unless file.content_type == 'text/csv'
+
+    file_size = (file.size.to_f / (1000 * 1000))
     return { error: '5MB is the max file size.' } unless file_size <= 5
 
     counter = 0

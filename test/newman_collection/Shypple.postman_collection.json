@@ -1,0 +1,371 @@
+{
+	"info": {
+		"_postman_id": "78939043-4070-49fa-adc4-2bae5ad9ac16",
+		"name": "Shypple",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Index",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6b9eea04-cbfd-4dc0-96c3-bfbb941a830e",
+						"exec": [
+							"// Save common tests glabally",
+							"postman.setEnvironmentVariable(\"commonTestsStatusCode\", () => {",
+							"    // Test whether the response is 200",
+							"    tests[\"Status code is 200\"] = responseCode.code >= 200",
+							"    tests[\"Status code is 202\"] = responseCode.code <= 202",
+							"});",
+							"postman.setEnvironmentVariable(\"commonTestsContentType\", () => {",
+							"    // The Content-Type must be JSON",
+							"    tests[\"Content-Type header is set\"] = postman.getResponseHeader(\"Content-Type\") === \"application/json; charset=utf-8\";",
+							"});",
+							"postman.setEnvironmentVariable(\"commonTestsResponsTime\", () => {",
+							"    // The response time must be less than 1.5 seconds",
+							"    tests[\"Response time is acceptable\"] = responseTime < 3000;",
+							"});",
+							"",
+							"//run common test",
+							"eval(globals.commonTestsStatusCode)();",
+							"eval(globals.commonTestsContentType)();",
+							"eval(globals.commonTestsResponsTime)();",
+							"",
+							"//response data",
+							"var responseData = JSON.parse(responseBody);",
+							"tests[\"Returns a valid Response\"] = typeof(responseData.info) === 'string';"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{host}}/",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d096e187-111f-4686-88f8-184d12a91652",
+						"exec": [
+							"//run common test",
+							"eval(globals.commonTestsStatusCode)();",
+							"eval(globals.commonTestsContentType)();",
+							"eval(globals.commonTestsResponsTime)();",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"login_token\", jsonData.token);",
+							"tests[\"Returns a valid Token\"] = typeof(jsonData.token) === 'string';"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "admin@example.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/login",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "admin@example.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://testing-dojo.herokuapp.com/login.json",
+							"protocol": "https",
+							"host": [
+								"testing-dojo",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"login.json"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Cowboy"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 13 Jan 2019 18:52:47 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "X-Xss-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"fb94c4a42866e5ffdd3d93666dd29ac5\""
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "_cms-bootstrap_session=VUY3YjFwRmRpUHNIRUFNd1Z0MDNwOWluNWM3M1MreklNK2sxRGRBeHdlYjJxT1FsZm01TWN3Rml5c3Q4YTk0aG9GaTYrTVd6cjZ3d0VqQzJncUdtVUE9PS0tb24vayt4UWhHTUVEZE90Mm9XNjFXdz09--b19c1054f598a037c8280bfd6e926c1211acca59; path=/; HttpOnly"
+						},
+						{
+							"key": "X-Request-Id",
+							"value": "961a4f08-7219-44ad-9d6a-ac1b4291408d"
+						},
+						{
+							"key": "X-Runtime",
+							"value": "0.129959"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"user\": {\n        \"id\": 1,\n        \"name\": \"Admin User\",\n        \"email\": \"admin@example.com\",\n        \"created_at\": \"2019-01-13T05:17:11.326Z\",\n        \"updated_at\": \"2019-01-13T05:17:11.326Z\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwIjoxNTQ4MDEwMzY3fQ.Gj2kFgSn568dbBDNZx-WWu_doftgmm4znnCe9AxdnJQ\"\n}"
+				}
+			]
+		},
+		{
+			"name": "List Ports",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0307a300-6c8d-428d-bf3f-d7a77cb5f2b4",
+						"exec": [
+							"//run common test",
+							"eval(globals.commonTestsStatusCode)();",
+							"eval(globals.commonTestsContentType)();",
+							"eval(globals.commonTestsResponsTime)();",
+							"",
+							"//response data",
+							"var responseData = JSON.parse(responseBody);",
+							"tests[\"Returns a valid Response\"] = typeof(responseData.info.str) === 'string';"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{host}}/ports?search=Cherdfsdf&port_type=airport&page=1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"ports"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "Cherdfsdf"
+						},
+						{
+							"key": "port_type",
+							"value": "airport"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Import Ports",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f10d1b0b-ad33-4f79-bafd-68d1ab118e2d",
+						"exec": [
+							"//run common test",
+							"eval(globals.commonTestsStatusCode)();",
+							"eval(globals.commonTestsContentType)();",
+							"//eval(globals.commonTestsResponsTime)(); //uploading file takes a bit longer",
+							"",
+							"//var jsonData = JSON.parse(responseBody);",
+							"//postman.setEnvironmentVariable(\"login_token\", jsonData.token);",
+							"//tests[\"Returns a valid Response\"] = typeof(jsonData.info) === 'string';"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "Auth-Token",
+						"value": "{{login_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": ""
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/ports",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"ports"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "46ec952d-02be-4f62-8860-aacc0e6ee07a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "830bb7a0-8c0a-49ae-86b7-956f1364925b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
