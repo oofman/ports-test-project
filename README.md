@@ -27,3 +27,26 @@ Good luck and looking forward to seeing your app!
 
 Regards,  
 **Shypple team**
+
+
+# Additional Notes
+
+I used a public heroku app for a public postgres database, details in the database.yml file
+
+
+## Postman collection & testing
+
+### The collection exists out of 2 files:
+* `test/newman_collection/Shypple.postman_collection.json`
+* `test/newman_collection/Shypple.postman_environment.json`
+
+### Bash script file:
+* `scripts/newman_to_slack.sh`
+
+If you execute the bash script it will use the postman collection files to run (using `newman` comman-line version of `postman`) multiple tests on each endpoint on the API.
+Including `login` & `import`
+
+The 2 collection files can also be imported into the stand-alone postman application for use of documentation and testing.
+* `environment` is hardcoded to 'http://localhost:3000/'
+
+
